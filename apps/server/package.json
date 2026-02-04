@@ -30,7 +30,7 @@
     "postman:test": "newman run postman/rest-api-collection.json"
   },
   "dependencies": {
-    "@apollo/server": "^5.2.0",
+    "@apollo/server": "^5.4.0",
     "@nestjs/apollo": "^13.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.0.0",
