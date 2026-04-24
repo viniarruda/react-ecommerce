@@ -13,7 +13,7 @@
     "autoprefixer": "^10.4.16",
     "eslint": "^9.0.0",
     "eslint-config-custom": "workspace:*",
-    "postcss": "^8.4.32",
+    "postcss": "^8.5.10",
     "react": "^18.2.0",
     "tailwindcss": "^3.4.0",
     "tsconfig": "workspace:*",
