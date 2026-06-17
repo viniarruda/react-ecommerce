@@ -5,7 +5,7 @@
   "types": "./src/index.ts",
   "license": "MIT",
   "scripts": {
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
@@ -20,7 +20,7 @@
     "js-cookie": "^3.0.5"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "^18.2.0 || ^19.0.0"
   }
 }
 

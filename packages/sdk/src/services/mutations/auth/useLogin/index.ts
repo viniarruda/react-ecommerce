@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useApiClient } from '@providers/ApiProvider';
 import { setToken, setRefreshToken } from '@sdk/client';
-import { useMeKey } from '@services/queries/auth/useMe';
+import { meKey } from '@services/queries/auth/useMe';
 import { loginRequest } from './request';
 import type { UseLoginInput } from './types';
 
@@ -18,7 +18,7 @@ export function useLogin() {
       
       // Update cache
       queryClient.invalidateQueries({ queryKey: ['auth'] });
-      queryClient.setQueryData(useMeKey(), data.user);
+      queryClient.setQueryData(meKey(), data.user);
     },
   });
 }

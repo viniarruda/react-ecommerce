@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useApiClient } from '@providers/ApiProvider';
-import { useMeKey } from './key';
+import { meKey } from './key';
 import { fetchMe } from './request';
 import { getStoredToken } from '../../../../client';
 
@@ -9,7 +9,7 @@ export function useMe() {
   const hasToken = !!getStoredToken();
 
   return useQuery({
-    queryKey: useMeKey(),
+    queryKey: meKey(),
     queryFn: () => fetchMe(client),
     retry: false,
     enabled: hasToken, // Only fetch if user has a token

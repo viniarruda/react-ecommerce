@@ -1,2 +1,2 @@
-export const useMeKey = () => ['auth', 'me'] as const;
+export const meKey = () => ['auth', 'me'] as const;
 
