@@ -4,6 +4,11 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@react-shop/design-system', '@react-shop/sdk'],
+  eslint: {
+    // Next 14's built-in lint runner is incompatible with ESLint 9; linting runs
+    // as a separate task (`pnpm lint`) with a flat config. Type-checking stays on.
+    ignoreDuringBuilds: true,
+  },
   images: {
     domains: ['localhost'],
     formats: ['image/avif', 'image/webp'],
