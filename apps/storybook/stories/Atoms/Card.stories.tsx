@@ -8,7 +8,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['elevated', 'outlined'],
+      options: ['elevated', 'outline', 'filled'],
     },
   },
 } satisfies Meta<typeof Card>;
@@ -37,7 +37,7 @@ export const Elevated: Story = {
 
 export const Outlined: Story = {
   render: () => (
-    <Card variant="outlined" className="max-w-sm">
+    <Card variant="outline" className="max-w-sm">
       <CardHeader>
         <h3 className="text-lg font-semibold">Outlined Card</h3>
         <p className="text-sm text-gray-500">With border</p>

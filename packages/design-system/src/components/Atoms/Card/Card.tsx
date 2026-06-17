@@ -40,3 +40,29 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = 'Card';
+
+export interface CardSectionProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const CardHeader = React.forwardRef<HTMLDivElement, CardSectionProps>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn('mb-3 flex flex-col gap-1', className)} {...props} />
+  )
+);
+
+CardHeader.displayName = 'CardHeader';
+
+export const CardContent = React.forwardRef<HTMLDivElement, CardSectionProps>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn('text-gray-700', className)} {...props} />
+  )
+);
+
+CardContent.displayName = 'CardContent';
+
+export const CardFooter = React.forwardRef<HTMLDivElement, CardSectionProps>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn('mt-4 flex items-center gap-2', className)} {...props} />
+  )
+);
+
+CardFooter.displayName = 'CardFooter';

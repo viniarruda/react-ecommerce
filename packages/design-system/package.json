@@ -5,28 +5,28 @@
   "types": "./src/index.tsx",
   "license": "MIT",
   "scripts": {
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "autoprefixer": "^10.4.16",
     "eslint": "^9.0.0",
     "eslint-config-custom": "workspace:*",
     "postcss": "^8.4.32",
     "react": "^18.2.0",
-    "tailwindcss": "^3.4.0",
+    "tailwindcss": "^4.1.0",
     "tsconfig": "workspace:*",
     "typescript": "^5.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.0",
     "lucide-react": "^0.263.1",
-    "tailwind-merge": "^2.6.0",
-    "tailwind-variants": "^0.1.20"
+    "tailwind-merge": "^3.3.0",
+    "tailwind-variants": "^1.0.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
   }
 }

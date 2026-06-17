@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "next": "^14.2.0",
@@ -24,11 +24,11 @@
     "@types/react-dom": "^19.0.0",
     "typescript": "^5.3.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^14.2.0",
+    "@next/eslint-plugin-next": "^15.0.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "tailwindcss": "^3.4.0",
-    "autoprefixer": "^10.4.16",
+    "tailwindcss": "^4.1.0",
+    "@tailwindcss/postcss": "^4.1.0",
     "postcss": "^8.4.32"
   }
 }
