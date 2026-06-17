@@ -1,15 +1,15 @@
-# Web App - Customer Ecommerce
+# Web App — Customer Ecommerce
 
-Customer-facing ecommerce application built with Next.js 14+, React 19, and PandaCSS.
+Customer-facing ecommerce application built with Next.js 15+, React 19, and Tailwind v4.
 
 ## Tech Stack
 
-- **Next.js 14+** - App Router, Server Components, Streaming
-- **React 19** - Latest React features
-- **TypeScript 5+** - Type safety
-- **PandaCSS** - Zero-runtime CSS-in-JS (via Design System)
-- **React Query** - Server state management (via SDK)
-- **React Hook Form + Zod** - Form handling and validation
+- **Next.js 15+** — App Router, Server Components, Streaming
+- **React 19** — Latest React features
+- **TypeScript 5+** — Type safety
+- **Tailwind v4** — CSS-first styling (via Design System)
+- **React Query** — Server state management (via SDK)
+- **React Hook Form + Zod** — Form handling and validation
 
 ## Getting Started
 
@@ -21,10 +21,9 @@ Customer-facing ecommerce application built with Next.js 14+, React 19, and Pand
 
 ### Setup
 
-1. **Install dependencies**
+1. **Install dependencies** (from repo root)
 
 ```bash
-cd apps/web
 pnpm install
 ```
 
@@ -36,8 +35,6 @@ Create `.env.local` in `apps/web/`:
 NEXT_PUBLIC_API_URL=http://localhost:5001
 ```
 
-See `ENV_SETUP.md` for all available environment variables.
-
 3. **Start development server**
 
 ```bash
@@ -46,133 +43,64 @@ pnpm dev
 
 The app will be available at `http://localhost:3000`
 
-## Development
-
-### Project Structure
+## Project Structure
 
 ```
 apps/web/
-├── app/                 # Next.js App Router
-│   ├── layout.tsx       # Root layout with providers
-│   ├── page.tsx         # Home page
-│   └── globals.css      # Global styles
-├── components/          # React components
-│   ├── layout/          # Layout components (Header, Footer)
-│   └── product/         # Product components
-├── hooks/               # Custom React hooks
-├── lib/                 # Utilities and helpers
-├── public/              # Static assets
+├── app/
+│   ├── layout.tsx           # Root layout with providers
+│   ├── page.tsx             # Home page
+│   └── modules/
+│       ├── auth/            # Login, register, forgot password
+│       └── layout/          # Header, footer wrappers
 ├── next.config.js
 ├── tsconfig.json
 └── package.json
 ```
 
-### Adding Pages
-
-Create new pages in `app/`:
-
-```typescript
-// app/products/page.tsx
-export default function ProductsPage() {
-  return <div>Products</div>;
-}
-```
-
-### Using Design System
+## Using Design System
 
 Import components from `@react-shop/design-system`:
 
 ```typescript
-import { Button, Card, Heading } from '@react-shop/design-system';
+import { Button, Card, cn } from '@react-shop/design-system';
 
 export default function MyComponent() {
   return (
-    <Card>
-      <Heading>Hello</Heading>
+    <Card className={cn('p-4')}>
       <Button>Click me</Button>
     </Card>
   );
 }
 ```
 
-### Using SDK
+## Using SDK
 
 Import hooks from `@react-shop/sdk`:
 
 ```typescript
 'use client';
 
-import { useProducts, useAddToCart } from '@react-shop/sdk';
+import { useProducts } from '@react-shop/sdk';
 
 export default function ProductList() {
   const { data: products, isLoading } = useProducts();
-  const addToCart = useAddToCart();
-
-  // ... use products and addToCart
+  // ...
 }
 ```
 
 ## Available Scripts
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Build for production
-- `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint
-
-## Features
-
-See `FEATURES_WEB.md` for the complete feature roadmap.
-
-### Phase 1 (Current)
-- ✅ Setup Next.js 14+ and React 19
-- ✅ Configure SDK providers
-- ✅ Create home page
-- ✅ Test Design System components
-- 🚧 Test SDK integration with backend
+```bash
+pnpm dev        # Start development server
+pnpm build      # Build for production
+pnpm start      # Start production server
+pnpm lint       # Run ESLint
+pnpm typecheck  # Run TypeScript check
+```
 
 ## Environment Variables
 
-All environment variables must be prefixed with `NEXT_PUBLIC_` to be accessible in the browser.
+All environment variables exposed to the browser must be prefixed with `NEXT_PUBLIC_`.
 
-See `ENV_SETUP.md` for details.
-
-## Deployment
-
-### Vercel (Recommended)
-
-1. Connect your GitHub repository to Vercel
-2. Configure environment variables
-3. Deploy
-
-### Other Platforms
-
-```bash
-pnpm build
-pnpm start
-```
-
-## Troubleshooting
-
-### Module not found errors
-
-```bash
-pnpm install
-```
-
-### SDK hooks not working
-
-1. Ensure backend is running on `http://localhost:5001`
-2. Check `NEXT_PUBLIC_API_URL` in `.env.local`
-3. Verify `SdkProvider` is in root layout
-
-### Design System styles not loading
-
-1. Check PandaCSS is installed in design-system package
-2. Verify `transpilePackages` in `next.config.js`
-3. Clear `.next` folder and rebuild
-
-## Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React 19 Documentation](https://react.dev)
-- [PandaCSS Documentation](https://panda-css.com)
+See `ENV_SETUP.md` for the full list.

@@ -1,301 +1,97 @@
-# React Ecommerce Boilerplate - Cursor Rules
+# React Ecommerce Boilerplate — Cursor Rules
 
 ## Project Overview
 
-This is a comprehensive ecommerce boilerplate built with:
-- **Monorepo**: Turborepo for managing multiple packages
-- **Frontend**: Next.js 14+ with App Router, PandaCSS for styling
-- **Backend**: NestJS + Prisma + GraphQL (Apollo Server)
+Monorepo white-label ecommerce boilerplate. Stack:
+- **Monorepo**: Turborepo + pnpm workspaces
+- **Frontend**: Next.js 15+ (App Router), Tailwind v4 (CSS-first), React 19
+- **Backend**: NestJS + Prisma 7 + REST (no GraphQL — resolvers are dead code)
 - **Database**: PostgreSQL
-- **SDK**: React context providers with Axios client and React Query hooks
-- **Design System**: PandaCSS-based component library with theming
+- **SDK**: `@react-shop/sdk` — Axios client + React Query hooks
+- **Design System**: `@react-shop/design-system` — Tailwind v4, tailwind-variants
 
-## Working with This Project
-
-### Architecture Overview
+## Architecture
 
 ```
-/apps
-  /web          → Customer-facing ecommerce (Next.js 14+)
-  /admin        → Admin dashboard (Next.js 14+)
-  /server       → Backend API (NestJS + Prisma + GraphQL)
-  /docs         → Developer documentation (Markdown)
+apps/
+  web/          → Customer-facing ecommerce (Next.js, port 3000)
+  admin/        → Admin dashboard (Next.js, deferred)
+  server/       → REST API (NestJS + Prisma, port 5001)
+  storybook/    → Component dev (Storybook)
 
-/packages
-  /design-system → PandaCSS components with theming
-  /sdk          → React providers, API client, and hooks
-  /eslint-config-custom → Shared ESLint config
-  /tsconfig     → Shared TypeScript config
+packages/
+  design-system/ → Tailwind v4 component library
+  sdk/           → Axios client + React Query hooks
+  eslint-config-custom/ → Shared ESLint flat config (v9)
+  tsconfig/      → Shared TypeScript config
 ```
 
-### Key Technologies
+## Key Technologies
 
-1. **Backend (NestJS + Prisma)**
-   - Database: PostgreSQL with Prisma ORM
-   - API: GraphQL with Apollo Server
-   - Auth: JWT + OAuth (Google, GitHub)
-   - All resolvers use Prisma for database access
+### Backend (NestJS + Prisma)
+- Database: PostgreSQL with Prisma 7 ORM
+- API: REST controllers (`@Controller`, `@Get`, `@Post`, etc.) — NOT GraphQL
+- Auth: JWT (access + refresh tokens) via Passport.js
+- Modules: auth, user, product, category, cart, order, review, store
 
-2. **SDK Package**
-   - Name: `@react-shop/sdk`
-   - Provides: `SdkProvider`, `ApiProvider`, `QueryProvider`
-   - Services organized by domain: `services/auth/`, `services/products/`, etc.
-   - Each service has `queries.ts` and `mutations.ts`
-   - Uses Axios client with automatic token management
+### SDK Package (`@react-shop/sdk`)
+- Provides: `SdkProvider` (wraps QueryClient + ApiProvider)
+- Services in `packages/sdk/src/services/<domain>/`
+  - `queries/`: React Query `useQuery` hooks
+  - `mutations/`: React Query `useMutation` hooks
+- Uses Axios client with automatic token refresh
+- Import: `import { useProducts, useLogin } from '@react-shop/sdk'`
 
-3. **Design System**
-   - Name: `@react-shop/design-system`
-   - Styling: PandaCSS (zero-runtime)
-   - Themes: Light/dark mode with semantic tokens
-   - Components: Layout, Typography, Forms, Ecommerce-specific
+### Design System (`@react-shop/design-system`)
+- Styling: Tailwind v4 CSS-first (NOT PandaCSS)
+- Tokens: defined in `packages/design-system/src/styles/global.css` in `@theme` block
+- Components: `Atoms/` → `Molecules/` → `Organisms/` → `Layout/` hierarchy
+- Utility: `cn()` exported from `@react-shop/design-system` (clsx + tailwind-merge v3)
+- Import: `import { Button, Card, cn } from '@react-shop/design-system'`
 
-### Development Workflow
+## Development Workflow
 
-1. **Starting Development**
-   ```bash
-   yarn install
-   yarn dev  # Starts all apps in parallel
-   ```
-
-2. **Database Migrations**
-   ```bash
-   cd apps/server
-   yarn prisma migrate dev --name migration_name
-   yarn prisma generate
-   ```
-
-3. **Adding New Components to Design System**
-   - Create component in `packages/design-system/src/components/`
-   - Use PandaCSS styling with `css()` or `styled()`
-   - Export from `packages/design-system/src/components/index.ts`
-
-4. **Adding New Services to SDK**
-   - Create folder in `packages/sdk/src/services/`
-   - Add `queries.ts` with React Query hooks using `useQuery`
-   - Add `mutations.ts` with React Query hooks using `useMutation`
-   - Use `useApiClient()` hook to access Axios instance
-   - Export from service `index.ts` and main `services/index.ts`
-
-5. **Backend Development**
-   - Create modules in `apps/server/src/`
-   - Each module has: service, resolver, DTOs
-   - Use PrismaService for database operations
-   - GraphQL schema in `apps/server/src/graphql/schemas/schema.gql`
-
-### Code Patterns
-
-1. **SDK Service Pattern**
-   ```typescript
-   // queries.ts
-   import { useQuery } from '@tanstack/react-query';
-   import { useApiClient } from '../../providers/ApiProvider';
-
-   export const useListItems = () => {
-     const { client } = useApiClient();
-     return useQuery({
-       queryKey: ['items'],
-       queryFn: async () => {
-         const { data } = await client.post('', {
-           query: `query { items { id name } }`,
-         });
-         return data.data.items;
-       },
-     });
-   };
-   ```
-
-2. **NestJS Resolver Pattern**
-   ```typescript
-   @Resolver('Item')
-   export class ItemResolver {
-     constructor(private itemService: ItemService) {}
-
-     @Query('items')
-     @UseGuards(JwtAuthGuard)
-     async getItems(@CurrentUser() user: any) {
-       return this.itemService.getItems();
-     }
-   }
-   ```
-
-3. **PandaCSS Component Pattern**
-   ```typescript
-   import { styled } from '../../../styled-system/jsx';
-
-   export const Component = styled('div', {
-     base: {
-       p: '4',
-       borderRadius: 'md',
-     },
-   });
-   ```
-
-### Important Notes
-
-- **Always use the SDK providers** - Wrap apps with `<SdkProvider>`
-- **Use semantic tokens** - Prefer `bg.surface` over `white`
-- **Follow feature structure** - Organize by domain, not by type
-- **Update documentation** - Add docs for new features in `apps/docs/`
-- **Type safety** - Always use TypeScript, no `any` types
-- **Prisma first** - Use Prisma for all database operations
-
-## Commit Convention Rule
-
-### When Finishing a New Feature
-
-**ALWAYS create a commit using Conventional Commits with simple, concise messages.**
-
-### Format
-
-```
-<type>: <simple description>
-```
-
-### Types
-
-- `feat` - New feature
-- `fix` - Bug fix
-- `docs` - Documentation changes
-- `style` - Code style changes (formatting, no logic change)
-- `refactor` - Code refactoring
-- `perf` - Performance improvements
-- `test` - Adding or updating tests
-- `chore` - Maintenance tasks (dependencies, config)
-
-### Rules
-
-1. **Keep it simple** - No need for long explanations
-2. **Use imperative mood** - "add" not "added", "fix" not "fixed"
-3. **No period at the end** - Keep it clean
-4. **Max 50 characters** for the subject line
-5. **One feature per commit** - Don't bundle multiple features
-
-### Examples
-
-✅ **Good:**
-```
-feat: add product search functionality
-fix: cart total calculation
-docs: update SDK usage examples
-refactor: extract auth logic to service
-chore: update dependencies
-```
-
-❌ **Bad:**
-```
-feat: Added a new product search functionality with filters and sorting options that allows users to...
-fixed the bug
-update
-WIP
-changes
-```
-
-### When to Commit
-
-- ✅ After completing a feature
-- ✅ After fixing a bug
-- ✅ After updating documentation
-- ✅ After refactoring code
-- ❌ Don't commit incomplete work with "WIP"
-- ❌ Don't commit debugging code or console.logs
-
-### Multi-Part Features
-
-For features spanning multiple commits, use scope:
-
-```
-feat(products): add list endpoint
-feat(products): add detail endpoint
-feat(products): add search functionality
-```
-
-### Breaking Changes
-
-If introducing breaking changes, add `!` after type:
-
-```
-feat!: migrate from services to sdk package
-refactor!: change API response format
-```
-
-Or add BREAKING CHANGE in body:
-
-```
-feat: migrate to new SDK architecture
-
-BREAKING CHANGE: Package renamed from @react-shop/services to @react-shop/sdk
-```
-
-## Additional Rules
-
-### Code Quality
-
-1. **Always run linter** before committing
-2. **Fix linter errors** - Don't ignore them
-3. **Write meaningful variable names** - No `x`, `y`, `temp`
-4. **Add JSDoc comments** for complex functions
-5. **Extract magic numbers** to named constants
-
-### Testing
-
-1. **Write tests** for new features (when applicable)
-2. **Run tests** before committing
-3. **Mock SDK** in component tests
-
-### Documentation
-
-1. **Update README** when adding major features
-2. **Add examples** in `apps/docs/` for new APIs
-3. **Document breaking changes** clearly
-4. **Update IMPLEMENTATION_STATUS.md** when completing todos
-
-### Don't Do
-
-- ❌ Don't commit directly to `main` without review
-- ❌ Don't commit with failing tests
-- ❌ Don't commit with linter errors
-- ❌ Don't commit `console.log` statements
-- ❌ Don't commit commented-out code
-- ❌ Don't commit TODO comments without context
-- ❌ Don't use `any` type in TypeScript
-- ❌ Don't skip error handling
-
-## Quick Reference
-
-### Start Development
+### Starting Development
 ```bash
 pnpm install
-pnpm dev
+pnpm dev  # Starts web + server
 ```
 
-### Database Commands
+### Database Migrations
 ```bash
 cd apps/server
-pnpm prisma migrate dev
-pnpm prisma studio
+pnpm prisma migrate dev --name migration_name
 pnpm prisma generate
+pnpm prisma db seed
 ```
 
-### Add New Package
-```bash
-pnpm add <package> --filter <workspace-name>
-```
+### Adding New Components to Design System
+- Create component in `packages/design-system/src/components/`
+- Use Tailwind v4 classes + `tailwind-variants` for variants
+- Export from `packages/design-system/src/index.tsx`
 
-### Build for Production
-```bash
-pnpm build
-```
+### Adding New Services to SDK
+- Create folder in `packages/sdk/src/services/<domain>/`
+- Add `queries/` with React Query `useQuery` hooks
+- Add `mutations/` with React Query `useMutation` hooks
+- Use `useApiClient()` hook to access Axios instance
+- Export from service `index.ts` and main `services/index.ts`
 
-### Run Linter
-```bash
-pnpm lint
-```
+### Backend Development
+- Create modules in `apps/server/src/`
+- Use `@Controller` + `@Get`/`@Post`/`@Put`/`@Delete` for REST (not `@Resolver`)
+- DTOs use `class-validator` decorators
+- Access DB via injected `PrismaService`
 
-## Resources
+## Commit Conventions
+- Conventional commits: `<type>[scope]: description`
+- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `revert`
+- Subject line: 72 chars max
+- Never commit directly to `main` — use PRs
 
-- [Documentation](./apps/docs/README.md)
-- [Features Overview](./FEATURES.md)
-- [Implementation Status](./IMPLEMENTATION_STATUS.md)
-- [SDK Documentation](./packages/sdk/README.md)
-- [Design System](./packages/design-system/README.md)
-
+## Code Standards
+- No unnecessary comments — write self-documenting code
+- No `any` types — use proper TypeScript types
+- Fail-fast: handle errors early, return immediately, avoid deep nesting
+- No `console.log` in committed code
+- No commented-out code

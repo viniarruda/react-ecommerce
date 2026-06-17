@@ -1,43 +1,24 @@
 # React Ecommerce Documentation
 
-Welcome to the comprehensive documentation for the React Ecommerce Boilerplate.
+Developer guides for the React Ecommerce Boilerplate.
 
-## Documentation Index
+## Index
 
 ### Getting Started
-- [Quick Start Guide](./getting_started.md) - Set up and run the project
-- [Project Structure](./project_structure.md) - Understanding the monorepo organization
-- [Environment Setup](./environment_setup.md) - Configure environment variables
+- [Getting Started](./getting_started.md) — Setup from clone to running app
 
 ### Backend
-- [Backend Overview](./backend.md) - NestJS + Prisma + GraphQL architecture
-- [Database Schema](./database_schema.md) - Complete database model reference
-- [GraphQL API](./graphql_api.md) - API queries and mutations reference
-- [Authentication](./authentication.md) - JWT + OAuth implementation
+- [Backend Overview](./backend.md) — NestJS + Prisma 7 REST API architecture
+- [Database Schema](./database_schema.md) — Prisma schema reference
+- [Authentication](./authentication.md) — JWT implementation
 
 ### Frontend Packages
-- [Design System](./design_system.md) - PandaCSS components and theming
-- [Services Package](./services_package.md) - React Query hooks and API client
-
-### Features
-- [Product Management](./products.md) - Creating and managing products
-- [Cart System](./cart.md) - Shopping cart implementation
-- [Order Processing](./orders.md) - Order creation and management
-- [Reviews & Ratings](./reviews.md) - Product review system
-- [User Management](./users.md) - User profiles and addresses
-
-### Development
-- [Adding New Features](./adding_features.md) - Extend the boilerplate
-- [Testing Guide](./testing.md) - Writing and running tests
-- [Deployment](./deployment.md) - Production deployment guide
-
-### Reference
-- [API Reference](./api_reference.md) - Complete API documentation
-- [Type Definitions](./types.md) - TypeScript types reference
-- [Troubleshooting](./troubleshooting.md) - Common issues and solutions
+- [Design System](./design_system.md) — Tailwind v4 components and theming
+- [SDK / Services](./services_package.md) — React Query hooks and API client
 
 ## Quick Links
 
+- [Architecture Overview](../APPS_ARCHITECTURE.md)
 - [Main README](../../README.md)
-- [Features Overview](../../FEATURES.md)
-- [Implementation Status](../../IMPLEMENTATION_STATUS.md)
+- [SDK README](../../packages/sdk/README.md)
+- [Design System README](../../packages/design-system/README.md)
