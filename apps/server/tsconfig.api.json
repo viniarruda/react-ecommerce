@@ -1,8 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist-api",
-    "baseUrl": "./src"
+    "outDir": "./dist-api"
   },
   "include": ["api/**/*.ts", "src/**/*.ts", "prisma/*.ts"]
 }
