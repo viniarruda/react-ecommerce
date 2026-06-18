@@ -4,7 +4,7 @@ import type { CartIconProps } from "./types";
 export function CartIcon({ itemCount = 0, LinkComponent }: CartIconProps) {
   return (
     <LinkComponent href="/cart" className="relative">
-      <div className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+      <div className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-gray-700 dark:text-gray-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

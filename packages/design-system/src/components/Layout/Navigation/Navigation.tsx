@@ -16,7 +16,7 @@ export function Navigation({ links, currentPath, LinkComponent }: NavigationProp
             href={link.href}
             className={cn(
               "transition-colors relative pb-1",
-              isActive ? "text-primary-600" : "text-gray-700 hover:text-primary-600"
+              isActive ? "text-primary-600" : "text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400"
             )}
           >
             <Text size="md" weight="medium">

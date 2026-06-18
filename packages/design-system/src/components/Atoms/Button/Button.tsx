@@ -8,8 +8,8 @@ const button = tv({
     variant: {
       solid: 'bg-primary-600 text-white hover:bg-primary-700 focus-visible:ring-primary-600',
       outline:
-        'border border-gray-300 bg-transparent hover:bg-gray-50 focus-visible:ring-gray-300',
-      ghost: 'bg-transparent hover:bg-gray-100 focus-visible:ring-gray-300',
+        'border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 focus-visible:ring-gray-300 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700',
+      ghost: 'bg-transparent text-gray-700 hover:bg-gray-100 focus-visible:ring-gray-300 dark:text-gray-200 dark:hover:bg-gray-700',
     },
     size: {
       sm: 'px-3 py-1.5 text-sm',
