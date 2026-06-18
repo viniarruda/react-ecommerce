@@ -8,17 +8,18 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   private pool: Pool;
 
   constructor() {
-    // Create PostgreSQL connection pool
+    const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+
     const pool = new Pool({
-      connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL,
+      connectionString,
+      // Keep pool small for serverless — avoids exhausting Supabase free tier connection limit
+      max: 2,
+      idleTimeoutMillis: 10_000,
+      connectionTimeoutMillis: 10_000,
     });
 
-    // Create Prisma adapter
     const adapter = new PrismaPg(pool);
-
-    // Initialize PrismaClient with adapter
     super({ adapter });
-    
     this.pool = pool;
   }
 
@@ -41,4 +42,3 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     return Promise.all(models.map((modelKey) => (this as any)[modelKey].deleteMany()));
   }
 }
-
