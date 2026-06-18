@@ -19,6 +19,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Generate Prisma client
+        working-directory: apps/server
+        run: npx prisma generate
+
       - name: Lint
         run: pnpm lint
 
@@ -37,6 +41,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        working-directory: apps/server
+        run: npx prisma generate
 
       - name: Typecheck (design-system)
         working-directory: packages/design-system
