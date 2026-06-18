@@ -1,25 +1,12 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
-import { Pool } from 'pg';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
-  private pool: Pool;
-
   constructor() {
-    // Create PostgreSQL connection pool
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL,
+    super({
+      log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
     });
-
-    // Create Prisma adapter
-    const adapter = new PrismaPg(pool);
-
-    // Initialize PrismaClient with adapter
-    super({ adapter });
-    
-    this.pool = pool;
   }
 
   async onModuleInit() {
@@ -28,7 +15,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 
   async onModuleDestroy() {
     await this.$disconnect();
-    await this.pool.end();
   }
 
   async cleanDatabase() {
@@ -41,4 +27,3 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     return Promise.all(models.map((modelKey) => (this as any)[modelKey].deleteMany()));
   }
 }
-
