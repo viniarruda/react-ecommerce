@@ -38,11 +38,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck (web)
-        run: npx tsc --noEmit -p apps/web/tsconfig.json
+      - name: Typecheck (design-system)
+        working-directory: packages/design-system
+        run: npx tsc --noEmit
 
       - name: Typecheck (sdk)
-        run: npx tsc --noEmit -p packages/sdk/tsconfig.json
+        working-directory: packages/sdk
+        run: npx tsc --noEmit
 
       - name: Typecheck (server)
-        run: npx tsc --noEmit -p apps/server/tsconfig.json
+        working-directory: apps/server
+        run: npx tsc --noEmit
+
+      - name: Typecheck (web)
+        working-directory: apps/web
+        run: npx tsc --noEmit
