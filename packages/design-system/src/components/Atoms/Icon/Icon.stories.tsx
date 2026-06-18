@@ -12,7 +12,8 @@ const meta: Meta<typeof Icon> = {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
     },
     color: {
-      control: 'color',
+      control: 'select',
+      options: ['primary', 'secondary', 'success', 'error', 'warning', 'text'],
     },
   },
 };
@@ -42,11 +43,10 @@ export const Sizes: Story = {
 export const Colors: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
-      <Icon icon={Heart} color="red" />
-      <Icon icon={ShoppingCart} color="blue" />
-      <Icon icon={User} color="green" />
-      <Icon icon={Search} color="purple" />
+      <Icon icon={Heart} color="error" />
+      <Icon icon={ShoppingCart} color="primary" />
+      <Icon icon={User} color="success" />
+      <Icon icon={Search} color="secondary" />
     </div>
   ),
 };
-
