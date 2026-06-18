@@ -31,7 +31,7 @@ export function UserMenu({
     <div className="relative" ref={menuRef}>
       <button
         onClick={onToggle}
-        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
       >
         <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center">
           <span className="text-white font-medium text-sm">
@@ -56,12 +56,12 @@ export function UserMenu({
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-          <div className="px-4 py-3 border-b border-gray-200">
-            <Text size="sm" weight="medium" className="text-gray-900">
+        <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+            <Text size="sm" weight="medium" className="text-gray-900 dark:text-gray-100">
               {user.firstName || ""} {user.lastName || ""}
             </Text>
-            <Text size="xs" className="text-gray-500">
+            <Text size="xs" className="text-gray-500 dark:text-gray-400">
               {user.email}
             </Text>
           </div>
@@ -69,34 +69,34 @@ export function UserMenu({
           <Stack className="py-2">
             <LinkComponent
               href="/account"
-              className="px-4 py-2 hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               onClick={onClose}
             >
               <Text size="sm">My Account</Text>
             </LinkComponent>
             <LinkComponent
               href="/account/orders"
-              className="px-4 py-2 hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               onClick={onClose}
             >
               <Text size="sm">My Orders</Text>
             </LinkComponent>
             <LinkComponent
               href="/cart"
-              className="px-4 py-2 hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               onClick={onClose}
             >
               <Text size="sm">Cart</Text>
             </LinkComponent>
           </Stack>
 
-          <div className="border-t border-gray-200 pt-2">
+          <div className="border-t border-gray-200 dark:border-gray-700 pt-2">
             <button
               onClick={() => {
                 onClose();
                 onLogout?.();
               }}
-              className="w-full px-4 py-2 text-left hover:bg-gray-50 transition-colors"
+              className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               <Text size="sm" className="text-red-600">
                 Sign Out
