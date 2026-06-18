@@ -1,12 +1,26 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+  private pool: Pool;
+
   constructor() {
-    super({
-      log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
+    const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+
+    const pool = new Pool({
+      connectionString,
+      // Keep pool small for serverless — avoids exhausting Supabase free tier connection limit
+      max: 2,
+      idleTimeoutMillis: 10_000,
+      connectionTimeoutMillis: 10_000,
     });
+
+    const adapter = new PrismaPg(pool);
+    super({ adapter });
+    this.pool = pool;
   }
 
   async onModuleInit() {
@@ -15,6 +29,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 
   async onModuleDestroy() {
     await this.$disconnect();
+    await this.pool.end();
   }
 
   async cleanDatabase() {
