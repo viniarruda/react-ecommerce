@@ -4,6 +4,11 @@ export interface FooterProps {
   onNewsletterSubmit: (e: React.FormEvent) => void;
   storeName?: string;
   tagline?: string;
+  social?: {
+    facebook?: string;
+    twitter?: string;
+    instagram?: string;
+  };
   LinkComponent: React.ComponentType<{
     href: string;
     className?: string;

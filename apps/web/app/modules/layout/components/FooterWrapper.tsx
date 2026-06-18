@@ -41,6 +41,7 @@ export function FooterWrapper() {
       onNewsletterSubmit={handleNewsletterSubmit}
       storeName={branding.store.name}
       tagline={branding.store.description}
+      social={branding.social}
       LinkComponent={LinkWrapper}
     />
   );
