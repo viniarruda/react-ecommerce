@@ -49,8 +49,8 @@ Remove (no durable value, actively misleading):
 
 ## Acceptance Criteria
 
-- [ ] No remaining references to PandaCSS, GraphQL/Apollo, or `@react-shop/services` in docs
-- [ ] `.cursorrules` reflects Tailwind + REST + Prisma 7 + `@react-shop/sdk`
-- [ ] One backend port used consistently across all docs and `.env` examples
-- [ ] Transient PR/status `.md` files removed
-- [ ] README quick-start commands actually work on a fresh clone
+- [x] No remaining references to PandaCSS, GraphQL/Apollo, or `@react-shop/services` in docs
+- [x] `.cursorrules` reflects Tailwind v4 + REST + Prisma 7 + `@react-shop/sdk`
+- [x] One backend port (5001) used consistently across all docs and `.env` examples
+- [x] Transient PR/status `.md` files removed (15 files deleted)
+- [x] README quick-start commands reflect real stack (pnpm, prisma migrate, no codegen)

@@ -43,3 +43,9 @@ export const REVIEW_ROUTES = {
   detail: (id: string) => `${API_PREFIX}/reviews/${id}`,
   moderate: (id: string) => `${API_PREFIX}/reviews/${id}/moderate`,
 } as const;
+
+export const ADDRESS_ROUTES = {
+  list: `${API_PREFIX}/users/me/addresses`,
+  create: `${API_PREFIX}/users/me/addresses`,
+  detail: (id: string) => `${API_PREFIX}/users/me/addresses/${id}`,
+} as const;

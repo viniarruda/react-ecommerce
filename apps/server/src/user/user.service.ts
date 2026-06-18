@@ -155,4 +155,39 @@ export class UserService {
       },
     });
   }
+
+  async getAddresses(userId: string) {
+    return this.prisma.address.findMany({
+      where: { userId },
+      orderBy: [{ isDefault: 'desc' }, { createdAt: 'desc' }],
+    });
+  }
+
+  async createAddress(
+    userId: string,
+    data: {
+      firstName: string;
+      lastName: string;
+      company?: string;
+      street1: string;
+      street2?: string;
+      city: string;
+      state: string;
+      zipCode: string;
+      country?: string;
+      phone?: string;
+      isDefault?: boolean;
+    },
+  ) {
+    if (data.isDefault) {
+      await this.prisma.address.updateMany({
+        where: { userId },
+        data: { isDefault: false },
+      });
+    }
+
+    return this.prisma.address.create({
+      data: { ...data, userId, country: data.country ?? 'US' },
+    });
+  }
 }

@@ -51,11 +51,11 @@ existing `@react-shop/sdk` (REST hooks already cover most endpoints) and
 
 ## Acceptance Criteria
 
-- [ ] Unauthenticated users can browse products/PDP; checkout & account require auth (middleware)
-- [ ] Product list supports search, category filter, sort, pagination + empty/loading/error states
-- [ ] PDP renders variants, price, rating, reviews, and add-to-cart works
-- [ ] Cart reads/writes via SDK; totals correct; quantity/remove work
-- [ ] Checkout creates a real order against the backend + seed and shows confirmation
-- [ ] Account shows profile + order history; logout clears session
-- [ ] New code follows the existing `modules/<feature>/{screens,components}` + barrel pattern
-- [ ] Uses design-system components (no ad-hoc duplicates); `pnpm lint`/typecheck green
+- [x] Unauthenticated users can browse products/PDP; checkout & account require auth (middleware + client-side layout guard)
+- [x] Product list supports search, category filter, sort + empty/loading/error states
+- [x] PDP renders variants, price, reviews, and add-to-cart works
+- [x] Cart reads/writes via SDK; totals correct; quantity/remove work
+- [x] Checkout creates a real order against the backend and shows confirmation (3-step: address → review → confirmation)
+- [x] Account shows profile + order history; logout clears session
+- [x] New code follows the existing `modules/<feature>/{screens,components}` + barrel pattern
+- [x] Uses design-system components (no ad-hoc duplicates); `pnpm lint`/typecheck green

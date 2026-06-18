@@ -9,9 +9,11 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "dev:app": "turbo run dev --parallel --filter=@react-shop/api --filter=web",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "setup:client": "npx tsx scripts/setup-client.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.0",
@@ -19,6 +21,7 @@
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.3",
     "prettier": "latest",
+    "tsx": "^4.19.0",
     "turbo": "latest"
   },
   "engines": {

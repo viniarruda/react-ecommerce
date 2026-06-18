@@ -3,12 +3,12 @@ import { tv, type VariantProps } from 'tailwind-variants';
 import { cn } from '@lib/utils';
 
 const card = tv({
-  base: 'rounded-lg bg-white',
+  base: 'rounded-lg bg-white dark:bg-gray-800',
   variants: {
     variant: {
-      elevated: 'shadow-md',
-      outline: 'border border-gray-200',
-      filled: 'bg-gray-50',
+      elevated: 'shadow-md dark:shadow-gray-950',
+      outline: 'border border-gray-200 dark:border-gray-700',
+      filled: 'bg-gray-50 dark:bg-gray-900',
     },
     padding: {
       none: 'p-0',

@@ -162,32 +162,25 @@ export function MobileMenu({
                 <>
                   <Divider className="my-2" />
                   <LinkComponent
-                    href="/dashboard"
+                    href="/account"
                     className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors"
                     onClick={onClose}
                   >
-                    <Text size="md">Dashboard</Text>
+                    <Text size="md">My Account</Text>
                   </LinkComponent>
                   <LinkComponent
-                    href="/orders"
+                    href="/account/orders"
                     className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors"
                     onClick={onClose}
                   >
-                    <Text size="md">Orders</Text>
+                    <Text size="md">My Orders</Text>
                   </LinkComponent>
                   <LinkComponent
-                    href="/wishlist"
+                    href="/cart"
                     className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors"
                     onClick={onClose}
                   >
-                    <Text size="md">Wishlist</Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href="/profile"
-                    className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors"
-                    onClick={onClose}
-                  >
-                    <Text size="md">Profile</Text>
+                    <Text size="md">Cart</Text>
                   </LinkComponent>
                 </>
               )}

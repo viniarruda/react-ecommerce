@@ -1,114 +1,63 @@
-name: Code-style
+name: CI
 
 on: [pull_request]
 
 jobs:
-  install:
-    name: Installing packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Use Node.js 16.14.0
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.14.0'
-          registry-url: https://npm.pkg.github.com/
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
-
-      - name: Cache node modules
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-
-      - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true' # It will run install dependencies just if hash of yarn.lock changed
-        run: yarn install --frozen-lockfile --prefer-offline
-
   lint:
-    name: Run ESLint
+    name: Lint
     runs-on: ubuntu-latest
-    needs: install
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js 16.14.0
-        uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16.14.0'
-          registry-url: https://npm.pkg.github.com/
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          node-version: '20'
+          cache: 'pnpm'
 
-      - name: Get Diff Action
-        id: git-diff
-        uses: technote-space/get-diff-action@v4.0.1
-        with:
-          PATTERNS: +(src)/**/*.+(js|ts|jsx|tsx)
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Restore node_modules
-        uses: actions/cache@v3
-        id: restore-build
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Generate Prisma client
+        working-directory: apps/server
+        run: npx prisma generate
 
-      - name: Lint files
-        run: yarn eslint ${{ steps.git-diff.outputs.diff }}
+      - name: Lint
+        run: pnpm lint
 
-  deadcode:
-    name: Find dead code
+  typecheck:
+    name: Typecheck
     runs-on: ubuntu-latest
-    needs: install
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js 16.14.0
-        uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16.14.0'
-          registry-url: https://npm.pkg.github.com/
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          node-version: '20'
+          cache: 'pnpm'
 
-      - name: Restore node_modules
-        uses: actions/cache@v3
-        id: restore-build
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Find dead code
-        run: yarn ts-prune --error --ignore '(src/pages)' --skip '.spec.ts?'
+      - name: Generate Prisma client
+        working-directory: apps/server
+        run: npx prisma generate
 
-  testing:
-    name: Unit testing
-    runs-on: ubuntu-latest
-    needs: install
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Typecheck (design-system)
+        working-directory: packages/design-system
+        run: npx tsc --noEmit
 
-      - name: Restore node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Typecheck (sdk)
+        working-directory: packages/sdk
+        run: npx tsc --noEmit
 
-      - name: Use Node.js 16.14.0
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.14.0'
-          registry-url: https://npm.pkg.github.com/
-          cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+      - name: Typecheck (server)
+        working-directory: apps/server
+        run: npx tsc --noEmit
 
-      - name: Run unit tests
-        run: yarn test --ci
+      - name: Typecheck (web)
+        working-directory: apps/web
+        run: npx tsc --noEmit

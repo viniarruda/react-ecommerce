@@ -137,8 +137,10 @@ export const setToken = (token: string | null) => {
   if (typeof window !== 'undefined') {
     if (token) {
       localStorage.setItem('accessToken', token);
+      document.cookie = 'is_authenticated=1; path=/; SameSite=Lax';
     } else {
       localStorage.removeItem('accessToken');
+      document.cookie = 'is_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
     }
   }
 };
@@ -176,6 +178,7 @@ export const clearStoredToken = () => {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    document.cookie = 'is_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax';
   }
 };
 

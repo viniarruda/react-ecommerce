@@ -14,6 +14,8 @@ import {
   type User,
   type NavLink,
 } from "@react-shop/design-system";
+import { branding } from "@/config/branding";
+import { ThemeToggle } from "./ThemeToggle";
 
 // Wrapper component to match the expected Link interface
 const LinkWrapper = ({
@@ -104,7 +106,14 @@ export function HeaderWrapper({
 
   return (
     <DSHeader
-      LogoComponent={<DSLogo LinkComponent={LinkWrapper} />}
+      LogoComponent={
+        <DSLogo
+          LinkComponent={LinkWrapper}
+          name={branding.store.logoText}
+          abbrev={branding.store.logoAbbrev}
+          logoUrl={branding.store.logoUrl}
+        />
+      }
       SearchBarComponent={
         <DSSearchBar
           value={searchQuery}
@@ -120,7 +129,10 @@ export function HeaderWrapper({
         />
       }
       CartIconComponent={
-        <DSCartIcon itemCount={cartItemCount} LinkComponent={LinkWrapper} />
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <DSCartIcon itemCount={cartItemCount} LinkComponent={LinkWrapper} />
+        </div>
       }
       UserMenuComponent={
         <DSUserMenu

@@ -10,7 +10,7 @@ export function Header({
   MobileMenuComponent,
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
+    <header className="sticky top-0 z-40 bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800">
       <Container>
         <Flex className="h-16 items-center justify-between gap-4">
           {/* Logo */}

@@ -62,6 +62,7 @@ export interface CreateProductInput {
   lowStockThreshold?: number;
   isActive?: boolean;
   isFeatured?: boolean;
+  images?: Array<{ url: string; alt?: string; sortOrder?: number; isPrimary?: boolean }>;
 }
 
 export interface UpdateProductInput {
