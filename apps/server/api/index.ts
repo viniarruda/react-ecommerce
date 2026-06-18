@@ -1,15 +1,12 @@
-// IMPORTANT: _register must be the FIRST import.
-// In CJS output, imports execute in declaration order,
-// so aliases are registered before any NestJS module is loaded.
-import './_register';
-
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express, { Request, Response } from 'express';
-import { AppModule } from '../src/app.module';
+
+// Import from compiled dist/ where path aliases are resolved by tsc-alias
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { AppModule } = require('../dist/app.module');
 
 const server = express();
-
 let app: any;
 
 async function bootstrap() {
