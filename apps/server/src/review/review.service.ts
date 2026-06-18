@@ -6,6 +6,17 @@ import { ReviewStatus } from '@prisma/client';
 export class ReviewService {
   constructor(private prisma: PrismaService) {}
 
+  async getAllReviews(status?: ReviewStatus) {
+    return this.prisma.review.findMany({
+      where: status ? { status } : undefined,
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, avatar: true } },
+        product: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
   async getReviews(productId: string, skip = 0, take = 10, status?: ReviewStatus) {
     return this.prisma.review.findMany({
       where: {

@@ -8,6 +8,21 @@ import { CurrentUser } from '@user/user.decorator';
 export class ReviewController {
   constructor(private reviewService: ReviewService) {}
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  async getAllReviews(@Query('status') status?: string): Promise<any[]> {
+    return await this.reviewService.getAllReviews(status as any);
+  }
+
+  @Put(':id/moderate')
+  @UseGuards(JwtAuthGuard)
+  async moderateReview(
+    @Param('id') id: string,
+    @Body() data: { status: string; adminResponse?: string },
+  ): Promise<any> {
+    return await this.reviewService.moderateReview(id, data.status as any, data.adminResponse);
+  }
+
   @Get('product/:productId')
   async getReviews(
     @Param('productId') productId: string,
