@@ -3,6 +3,9 @@
 /* The design-system components live outside the consuming app, so scan them explicitly. */
 @source '../';
 
+/* Dark mode: enabled via .dark class on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Build-time theme tokens. These become CSS variables (e.g. --color-primary-600),
    which is what the white-label branding layer overrides per client. */
 @theme {
@@ -72,8 +75,10 @@
   --color-warning-900: #78350f;
 
   /* Typography */
-  --font-sans: var(--font-poppins), system-ui, sans-serif;
-  --font-heading: var(--font-poppins), system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-heading: var(--font-dm-sans), system-ui, sans-serif;
+  --font-display: var(--font-syne), system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), 'Courier New', monospace;
   --text-2xs: 0.625rem;
 }
 
@@ -88,7 +93,7 @@
   }
 
   body {
-    @apply font-sans antialiased;
+    @apply font-sans antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100;
   }
 
   img {

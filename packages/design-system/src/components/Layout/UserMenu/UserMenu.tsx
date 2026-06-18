@@ -68,32 +68,25 @@ export function UserMenu({
 
           <Stack className="py-2">
             <LinkComponent
-              href="/dashboard"
+              href="/account"
               className="px-4 py-2 hover:bg-gray-50 transition-colors"
               onClick={onClose}
             >
-              <Text size="sm">Dashboard</Text>
+              <Text size="sm">My Account</Text>
             </LinkComponent>
             <LinkComponent
-              href="/orders"
+              href="/account/orders"
               className="px-4 py-2 hover:bg-gray-50 transition-colors"
               onClick={onClose}
             >
-              <Text size="sm">Orders</Text>
+              <Text size="sm">My Orders</Text>
             </LinkComponent>
             <LinkComponent
-              href="/profile"
+              href="/cart"
               className="px-4 py-2 hover:bg-gray-50 transition-colors"
               onClick={onClose}
             >
-              <Text size="sm">Profile</Text>
-            </LinkComponent>
-            <LinkComponent
-              href="/wishlist"
-              className="px-4 py-2 hover:bg-gray-50 transition-colors"
-              onClick={onClose}
-            >
-              <Text size="sm">Wishlist</Text>
+              <Text size="sm">Cart</Text>
             </LinkComponent>
           </Stack>
 

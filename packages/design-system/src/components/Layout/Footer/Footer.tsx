@@ -13,6 +13,8 @@ export function Footer({
   newsletterEmail,
   onNewsletterEmailChange,
   onNewsletterSubmit,
+  storeName = "React Shop",
+  tagline = "Your one-stop shop for quality products at unbeatable prices.",
   LinkComponent,
 }: FooterProps) {
   return (
@@ -24,10 +26,10 @@ export function Footer({
             {/* Company Info */}
             <Stack className="gap-4">
               <Heading as="h3" size="lg" className="text-white">
-                React Shop
+                {storeName}
               </Heading>
               <Text size="sm" className="text-gray-400">
-                Your one-stop shop for quality products at unbeatable prices.
+                {tagline}
               </Text>
               <Flex className="gap-4">
                 <LinkComponent
@@ -177,7 +179,7 @@ export function Footer({
         <div className="border-t border-gray-800 py-6">
           <Flex className="flex-col md:flex-row justify-between items-center gap-4">
             <Text size="sm" className="text-gray-400">
-              © {new Date().getFullYear()} React Shop. All rights reserved.
+              © {new Date().getFullYear()} {storeName}. All rights reserved.
             </Text>
             <Flex className="gap-6">
               <LinkComponent

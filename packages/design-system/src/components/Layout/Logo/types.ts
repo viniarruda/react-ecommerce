@@ -4,5 +4,8 @@ export interface LogoProps {
     className?: string;
     children: React.ReactNode;
   }>;
+  name?: string;
+  abbrev?: string;
+  logoUrl?: string;
 }
 
