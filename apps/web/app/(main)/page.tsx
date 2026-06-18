@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { useProducts, useCategories } from "@react-shop/sdk";
+import { formatPrice } from "@/lib/format";
+import { branding } from "@/config/branding";
 
 /* ── Price formatter ─────────────────────────────────────── */
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(n);
+const fmt = (n: number) => formatPrice(n, { minimumFractionDigits: 0 });
 
 /* ── Marquee strip ───────────────────────────────────────── */
 const MARQUEE_ITEMS = [
   "NEW ARRIVALS",
   "✦",
-  "FREE SHIPPING OVER $50",
+  `FREE SHIPPING OVER ${fmt(branding.shipping.freeShippingThreshold)}`,
   "✦",
   "EASY RETURNS",
   "✦",
@@ -19,7 +20,7 @@ const MARQUEE_ITEMS = [
   "✦",
   "NEW ARRIVALS",
   "✦",
-  "FREE SHIPPING OVER $50",
+  `FREE SHIPPING OVER ${fmt(branding.shipping.freeShippingThreshold)}`,
   "✦",
   "EASY RETURNS",
   "✦",

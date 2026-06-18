@@ -1,6 +1,9 @@
 import { StaticPage } from "@/app/modules/static/StaticPage";
+import { branding } from "@/config/branding";
 
-export const metadata = { title: "Returns & Refunds | Berzerk" };
+export const metadata = { title: "Returns & Refunds" };
+
+const { policies } = branding;
 
 export default function ReturnsPage() {
   return (
@@ -9,8 +12,8 @@ export default function ReturnsPage() {
       subtitle="Not happy? We make it easy to return or exchange."
       sections={[
         {
-          heading: "30-Day Return Policy",
-          content: "We accept returns on most items within 30 days of delivery. Items must be in their original condition — unworn, unwashed, with tags attached, and in the original packaging.",
+          heading: `${policies.returnWindowDays}-Day Return Policy`,
+          content: `We accept returns on most items within ${policies.returnWindowDays} days of delivery. Items must be in their original condition — unworn, unwashed, with tags attached, and in the original packaging.`,
         },
         {
           heading: "Items Eligible for Return",
@@ -43,7 +46,7 @@ export default function ReturnsPage() {
         },
         {
           heading: "Refund Timeline",
-          content: "Once we receive and inspect your return, refunds are processed within 3–5 business days. The credit will appear on your original payment method within 5–10 business days depending on your bank.",
+          content: `Once we receive and inspect your return, refunds are processed within ${policies.refundProcessingDays}. The credit will appear on your original payment method within ${policies.refundCreditDays} depending on your bank.`,
         },
         {
           heading: "Exchanges",

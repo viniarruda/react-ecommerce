@@ -4,9 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useProduct, useMe } from "@react-shop/sdk";
 import { ImageGallery, VariantSelector, ReviewList, AddToCartButton } from "../components";
+import { formatPrice } from "@/lib/format";
 
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+const fmt = (n: number) => formatPrice(n);
 
 interface Props { productId: string }
 

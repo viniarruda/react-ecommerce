@@ -11,9 +11,10 @@ import {
   OrderStatus,
 } from "@react-shop/sdk";
 import { StatCard } from "../components";
+import { formatPrice } from "@/lib/format";
 
 function fmt(n: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+  return formatPrice(n);
 }
 
 export function DashboardScreen() {

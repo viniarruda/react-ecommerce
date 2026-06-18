@@ -2,6 +2,7 @@
 
 import { Card, Text, Badge, PriceDisplay } from "@react-shop/design-system";
 import { type Order, OrderStatus } from "@react-shop/sdk";
+import { formatDate } from "@/lib/format";
 
 const STATUS_COLOR: Record<OrderStatus, "primary" | "success" | "warning" | "error" | undefined> = {
   [OrderStatus.PENDING]: "warning",
@@ -22,7 +23,7 @@ export function OrderCard({ order }: OrderCardProps) {
         <div>
           <Text weight="medium">{order.orderNumber}</Text>
           <Text size="sm" color="secondary">
-            {new Date(order.createdAt).toLocaleDateString("en-US", {
+            {formatDate(order.createdAt, {
               year: "numeric",
               month: "long",
               day: "numeric",

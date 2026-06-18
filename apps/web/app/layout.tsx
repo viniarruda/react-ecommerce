@@ -29,7 +29,10 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${branding.store.name} - ${branding.store.tagline}`,
+  title: {
+    default: `${branding.store.name} - ${branding.store.tagline}`,
+    template: `%s | ${branding.store.name}`,
+  },
   description: branding.store.description,
 };
 
@@ -51,7 +54,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang={branding.locale.language}
       className={`${syne.variable} ${dmSans.variable} ${spaceMono.variable}`}
       suppressHydrationWarning
     >

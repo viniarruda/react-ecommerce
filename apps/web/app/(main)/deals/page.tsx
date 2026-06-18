@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useProducts } from "@react-shop/sdk";
+import { formatPrice } from "@/lib/format";
 
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(n);
+const fmt = (n: number) => formatPrice(n, { minimumFractionDigits: 0 });
 
 export default function DealsPage() {
   const { data: products, isLoading } = useProducts();

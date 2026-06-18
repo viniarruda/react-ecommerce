@@ -11,6 +11,7 @@ import {
   type CreateProductInput,
 } from "@react-shop/sdk";
 import { AdminTable } from "../components";
+import { formatPrice } from "@/lib/format";
 
 interface ImageEntry { url: string; alt: string }
 
@@ -243,8 +244,7 @@ export function AdminProductsScreen() {
   const { mutate: deleteProduct } = useDeleteProduct();
   const [modal, setModal] = useState<"new" | Product | null>(null);
 
-  const fmt = (n: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+  const fmt = (n: number) => formatPrice(n);
 
   return (
     <div>
