@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Footer as DSFooter } from "@react-shop/design-system";
+import { branding } from "@/config/branding";
 
 // Wrapper component to match the expected Link interface
 const LinkWrapper = ({
@@ -38,6 +39,8 @@ export function FooterWrapper() {
       newsletterEmail={newsletterEmail}
       onNewsletterEmailChange={setNewsletterEmail}
       onNewsletterSubmit={handleNewsletterSubmit}
+      storeName={branding.store.name}
+      tagline={branding.store.description}
       LinkComponent={LinkWrapper}
     />
   );

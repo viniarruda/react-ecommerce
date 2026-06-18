@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MobileMenu } from '@react-shop/design-system';
-import { useState } from 'react';
 
 const meta = {
   title: 'Layout/MobileMenu',
@@ -11,11 +11,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const mockLinks = [
-  { label: 'Home', href: '/', isActive: true },
-  { label: 'Products', href: '/products', isActive: false },
-  { label: 'Categories', href: '/categories', isActive: false },
-  { label: 'About', href: '/about', isActive: false },
+const mockNavLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'Categories', href: '/categories' },
+  { label: 'About', href: '/about' },
 ];
 
 const MockLink = ({ href, children, className, onClick }: any) => (
@@ -34,10 +34,11 @@ export const LoggedOut: Story = {
         </button>
         <MobileMenu
           isOpen={isOpen}
+          onToggle={() => setIsOpen((v) => !v)}
           onClose={() => setIsOpen(false)}
           user={null}
-          links={mockLinks}
-          onLogin={() => console.log('Login')}
+          navLinks={mockNavLinks}
+          currentPath="/"
           onLogout={() => console.log('Logout')}
           LinkComponent={MockLink}
         />
@@ -56,14 +57,11 @@ export const LoggedIn: Story = {
         </button>
         <MobileMenu
           isOpen={isOpen}
+          onToggle={() => setIsOpen((v) => !v)}
           onClose={() => setIsOpen(false)}
-          user={{
-            firstName: 'John',
-            lastName: 'Doe',
-            email: 'john.doe@example.com',
-          }}
-          links={mockLinks}
-          onLogin={() => console.log('Login')}
+          user={{ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' }}
+          navLinks={mockNavLinks}
+          currentPath="/products"
           onLogout={() => console.log('Logout')}
           LinkComponent={MockLink}
         />
@@ -71,4 +69,3 @@ export const LoggedIn: Story = {
     );
   },
 };
-

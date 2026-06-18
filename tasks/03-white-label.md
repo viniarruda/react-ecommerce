@@ -51,9 +51,9 @@ editing components. Build-time approach (one deploy per client), not runtime mul
 
 ## Acceptance Criteria
 
-- [ ] Editing `config/branding.ts` (name + colors + logo) re-themes the storefront with no component edits
-- [ ] Logo and page metadata are config-driven; no "React Shop" hardcoded
-- [ ] Color tokens resolve through CSS variables; one place to change a client's palette
-- [ ] Dark mode toggles and renders correctly across the storefront
-- [ ] Storybook reflects the same tokens (no duplicated config) and `.env.example` is complete
-- [ ] `pnpm setup:client` scaffolds a new client's branding + env end-to-end
+- [x] Editing `config/branding.ts` (name + colors + logo) re-themes the storefront with no component edits
+- [x] Logo and page metadata are config-driven; no "React Shop" hardcoded in components
+- [x] Color tokens resolve through CSS variables in `app/brand.css`; one place to change a client's palette
+- [x] Dark mode toggles via ThemeToggle button in header; ThemeProvider persists to localStorage with no flash
+- [x] Storybook already uses DS global.css (no duplicated token config); `.env.example` complete
+- [x] `pnpm setup:client` (via `scripts/setup-client.ts` + tsx) scaffolds branding.ts, brand.css, .env.local

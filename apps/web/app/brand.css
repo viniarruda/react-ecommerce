@@ -1,0 +1,116 @@
+/*
+ * Berzerk — brand overrides & shop-specific design tokens.
+ * Edit directly or re-run `pnpm setup:client` to regenerate.
+ */
+
+/* ── Palette: Warm Amber Gold ────────────────────────────── */
+:root {
+  --color-primary:     #c28b19;
+  --color-primary-50:  #fdf8ed;
+  --color-primary-100: #f9efd3;
+  --color-primary-200: #f2dba0;
+  --color-primary-300: #e9c468;
+  --color-primary-400: #deaf3e;
+  --color-primary-500: #d49b23;
+  --color-primary-600: #c28b19;
+  --color-primary-700: #a07015;
+  --color-primary-800: #7d5612;
+  --color-primary-900: #5a3e0e;
+
+  /* Body/display font overrides — use the fonts loaded in layout.tsx */
+  --font-sans:    var(--font-dm-sans), system-ui, sans-serif;
+  --font-heading: var(--font-dm-sans), system-ui, sans-serif;
+  --font-display: var(--font-syne), system-ui, sans-serif;
+  --font-mono:    var(--font-space-mono), 'Courier New', monospace;
+
+  /* Shop surface tokens */
+  --shop-bg:        #faf9f7;
+  --shop-surface:   #ffffff;
+  --shop-border:    #e8e4de;
+  --shop-muted:     #8a8578;
+  --shop-overlay:   rgba(10, 8, 5, 0.04);
+}
+
+/* ── Dark mode ───────────────────────────────────────────── */
+.dark {
+  color-scheme: dark;
+  --color-primary:     #e5b752;
+  --color-primary-400: #f0cc76;
+  --color-primary-500: #e5b752;
+  --color-primary-600: #d9a030;
+  --color-primary-700: #c28b19;
+
+  --shop-bg:        #0d0b08;
+  --shop-surface:   #171410;
+  --shop-border:    #2a2520;
+  --shop-muted:     #706860;
+  --shop-overlay:   rgba(255, 255, 255, 0.03);
+}
+
+/* ── Base overrides ──────────────────────────────────────── */
+body {
+  background-color: var(--shop-bg);
+  font-family: var(--font-sans);
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography utilities ────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-price {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+/* ── Marquee animation ───────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ── Product card hover ──────────────────────────────────── */
+.shop-card {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.shop-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.10);
+}
+
+.shop-card-img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.shop-card:hover .shop-card-img {
+  transform: scale(1.04);
+}
+
+/* ── Hero text reveal ────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.anim-delay-1 { animation-delay: 0.1s; }
+.anim-delay-2 { animation-delay: 0.22s; }
+.anim-delay-3 { animation-delay: 0.36s; }
+.anim-delay-4 { animation-delay: 0.50s; }

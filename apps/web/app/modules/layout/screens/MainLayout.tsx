@@ -1,7 +1,8 @@
 "use client";
 
 import { HeaderWrapper, FooterWrapper } from "@/app/modules/layout/components";
-import { useMe, useLogout } from "@react-shop/sdk";
+import { useMe, useLogout, useCart } from "@react-shop/sdk";
+import { useGuestCart } from "@/app/providers/GuestCartProvider";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -10,9 +11,11 @@ interface MainLayoutProps {
 export function MainLayout({ children }: MainLayoutProps) {
   const { data: user } = useMe();
   const { mutate: logout } = useLogout();
+  const { data: cart } = useCart();
+  const guestCart = useGuestCart();
 
-  // TODO: Get cart item count from cart context/hook when implemented
-  const cartItemCount = 0;
+  const serverCount = cart?.items?.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
+  const cartItemCount = user ? serverCount : guestCart.itemCount;
 
   const handleLogout = () => {
     logout();
