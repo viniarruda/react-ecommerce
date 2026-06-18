@@ -23,11 +23,11 @@ export interface Address {
   firstName: string;
   lastName: string;
   company: string | null;
-  address1: string;
-  address2: string | null;
+  street1: string;
+  street2: string | null;
   city: string;
   state: string;
-  postalCode: string;
+  zipCode: string;
   country: string;
   phone: string | null;
   isDefault: boolean;
@@ -54,12 +54,12 @@ export interface AddAddressInput {
   firstName: string;
   lastName: string;
   company?: string;
-  address1: string;
-  address2?: string;
+  street1: string;
+  street2?: string;
   city: string;
   state: string;
-  postalCode: string;
-  country: string;
+  zipCode: string;
+  country?: string;
   phone?: string;
   isDefault?: boolean;
 }
