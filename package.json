@@ -34,9 +34,21 @@
       "multer": "^2.2.0",
       "ws": "^8.21.0",
       "form-data": "^4.0.6",
-      "axios": "^1.8.2",
+      "axios": "^1.16.0",
       "nodemailer": "^9.0.1",
-      "vite": "^6.4.3"
+      "vite": "^6.4.3",
+      "hono": "^4.12.25",
+      "tmp": "^0.2.6",
+      "js-cookie": "^3.0.7",
+      "fast-uri": "^3.1.2",
+      "next": "^15.5.16",
+      "qs": "^6.15.2",
+      "postcss": "^8.5.10",
+      "tar": "^7.5.16",
+      "serialize-javascript": "^7.0.5",
+      "follow-redirects": "^1.16.0",
+      "brace-expansion": "^2.0.1",
+      "uuid": "^11.1.1"
     }
   }
 }
