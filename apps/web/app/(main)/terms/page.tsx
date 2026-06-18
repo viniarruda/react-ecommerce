@@ -1,12 +1,13 @@
 import { StaticPage } from "@/app/modules/static/StaticPage";
+import { branding } from "@/config/branding";
 
-export const metadata = { title: "Terms of Service | Berzerk" };
+export const metadata = { title: "Terms of Service" };
 
 export default function TermsPage() {
   return (
     <StaticPage
       title="Terms of Service"
-      subtitle="By using Berzerk, you agree to the following terms and conditions."
+      subtitle={`By using ${branding.store.name}, you agree to the following terms and conditions.`}
       lastUpdated="June 18, 2026"
       sections={[
         {
@@ -24,7 +25,7 @@ export default function TermsPage() {
         },
         {
           heading: "Products and Pricing",
-          content: "All prices are listed in USD and are subject to change without notice. We reserve the right to limit quantities, discontinue products, or refuse orders at our discretion. Product images are for illustrative purposes and may differ slightly from the actual product.",
+          content: `All prices are listed in ${branding.locale.currency} and are subject to change without notice. We reserve the right to limit quantities, discontinue products, or refuse orders at our discretion. Product images are for illustrative purposes and may differ slightly from the actual product.`,
         },
         {
           heading: "Orders and Payment",
@@ -37,11 +38,11 @@ export default function TermsPage() {
         },
         {
           heading: "Intellectual Property",
-          content: "All content on this website — including text, graphics, logos, and images — is the property of Berzerk and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.",
+          content: `All content on this website — including text, graphics, logos, and images — is the property of ${branding.store.name} and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.`,
         },
         {
           heading: "Limitation of Liability",
-          content: "Berzerk shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of this website or our products. Our total liability shall not exceed the amount you paid for the specific order giving rise to the claim.",
+          content: `${branding.store.name} shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of this website or our products. Our total liability shall not exceed the amount you paid for the specific order giving rise to the claim.`,
         },
         {
           heading: "Governing Law",

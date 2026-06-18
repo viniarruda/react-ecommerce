@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Heading, Text, Button, Card, PriceDisplay, Divider } from "@react-shop/design-system";
 import { useOrder, useUpdateOrderStatus, useCancelOrder, OrderStatus } from "@react-shop/sdk";
+import { formatPrice, formatDate } from "@/lib/format";
 
 const STATUS_OPTIONS = [
   OrderStatus.PENDING,
@@ -29,8 +30,7 @@ export function AdminOrderDetailScreen({ orderId }: Props) {
   if (isLoading) return <Text color="secondary">Loading…</Text>;
   if (!order) return <Text color="error">Order not found.</Text>;
 
-  const fmt = (n: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+  const fmt = (n: number) => formatPrice(n);
 
   return (
     <div>
@@ -42,7 +42,7 @@ export function AdminOrderDetailScreen({ orderId }: Props) {
         <div>
           <Heading as="h1" size="2xl">{order.orderNumber}</Heading>
           <Text size="sm" color="secondary">
-            Placed {new Date(order.createdAt).toLocaleDateString("en-US", { dateStyle: "long" })}
+            Placed {formatDate(order.createdAt, { dateStyle: "long" })}
           </Text>
         </div>
 

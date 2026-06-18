@@ -4,9 +4,10 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useProducts, useCategories } from "@react-shop/sdk";
 import type { SortOption } from "../components";
+import { formatPrice } from "@/lib/format";
+import { branding } from "@/config/branding";
 
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(n);
+const fmt = (n: number) => formatPrice(n, { minimumFractionDigits: 0 });
 
 const SORT_LABELS: Record<SortOption, string> = {
   newest: "Newest",
@@ -91,7 +92,7 @@ export function ProductListScreen() {
     switch (sortBy) {
       case "price-asc": result.sort((a, b) => a.price - b.price); break;
       case "price-desc": result.sort((a, b) => b.price - a.price); break;
-      case "name-asc": result.sort((a, b) => a.title.localeCompare(b.title)); break;
+      case "name-asc": result.sort((a, b) => a.title.localeCompare(b.title, branding.locale.language)); break;
       default: result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     }
     return result;
@@ -104,7 +105,7 @@ export function ProductListScreen() {
         {/* ── Page header ── */}
         <div className="pt-12 pb-8 border-b border-[color:var(--shop-border)]">
           <p className="text-[10px] tracking-[0.22em] uppercase text-[color:var(--shop-muted)] mb-2">
-            Berzerk Store
+            {branding.store.name} Store
           </p>
           <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-semibold text-gray-900 dark:text-gray-50 leading-tight">
             All Products

@@ -12,6 +12,7 @@ import {
 } from "@react-shop/design-system";
 import { useMe } from "@react-shop/sdk";
 import Link from "next/link";
+import { formatDate } from "@/lib/format";
 
 export function ProfileScreen() {
   const { data: user, isLoading } = useMe();
@@ -71,7 +72,7 @@ export function ProfileScreen() {
           <div>
             <Text size="sm" color="secondary">Member Since</Text>
             <Text weight="medium">
-              {new Date(user.createdAt).toLocaleDateString("en-US", {
+              {formatDate(user.createdAt, {
                 month: "long",
                 year: "numeric",
               })}

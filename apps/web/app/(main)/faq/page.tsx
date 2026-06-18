@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { branding } from "@/config/branding";
+import { formatPrice } from "@/lib/format";
+
+const { shipping, policies } = branding;
+const threshold = formatPrice(shipping.freeShippingThreshold, { minimumFractionDigits: 0 });
 
 const FAQS = [
   {
@@ -16,16 +21,16 @@ const FAQS = [
   {
     category: "Shipping",
     items: [
-      { q: "How long does shipping take?", a: "Standard shipping takes 5–7 business days. Express shipping takes 2–3 business days. Overnight shipping is available for orders placed before 1pm EST." },
-      { q: "Do you ship internationally?", a: "Yes, we ship to over 50 countries. International shipping takes 10–21 business days. Customs duties and import taxes are the customer's responsibility." },
-      { q: "Is shipping free?", a: "Standard shipping is free on orders over $50. Orders under $50 have a flat $4.99 shipping fee. Express and overnight shipping have additional costs." },
+      { q: "How long does shipping take?", a: `Standard shipping takes ${shipping.standardDays}. Express shipping takes ${shipping.expressDays}. Overnight shipping is available for orders placed before ${shipping.overnightCutoff}.` },
+      { q: "Do you ship internationally?", a: `Yes, we ship to over 50 countries. International shipping takes ${shipping.internationalDays}. Customs duties and import taxes are the customer's responsibility.` },
+      { q: "Is shipping free?", a: `Standard shipping is free on orders over ${threshold}. Orders under ${threshold} have a flat ${formatPrice(shipping.standardFee)} shipping fee. Express and overnight shipping have additional costs.` },
     ],
   },
   {
     category: "Returns & Refunds",
     items: [
-      { q: "What is your return policy?", a: "We accept returns within 30 days of delivery. Items must be unused, unworn, and in original packaging. Visit our Returns page to start the process." },
-      { q: "How long does a refund take?", a: "Once we receive your return, refunds are processed in 3–5 business days. The credit appears on your card within 5–10 business days." },
+      { q: "What is your return policy?", a: `We accept returns within ${policies.returnWindowDays} days of delivery. Items must be unused, unworn, and in original packaging. Visit our Returns page to start the process.` },
+      { q: "How long does a refund take?", a: `Once we receive your return, refunds are processed in ${policies.refundProcessingDays}. The credit appears on your card within ${policies.refundCreditDays}.` },
       { q: "Can I exchange an item?", a: "Yes! We offer free exchanges for a different size or color of the same item, subject to availability. Start the process from My Orders in your account." },
     ],
   },

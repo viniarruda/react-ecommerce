@@ -1,6 +1,11 @@
 import { StaticPage } from "@/app/modules/static/StaticPage";
+import { branding } from "@/config/branding";
+import { formatPrice } from "@/lib/format";
 
-export const metadata = { title: "Shipping Information | Berzerk" };
+export const metadata = { title: "Shipping Information" };
+
+const { shipping } = branding;
+const threshold = formatPrice(shipping.freeShippingThreshold, { minimumFractionDigits: 0 });
 
 export default function ShippingPage() {
   return (
@@ -10,20 +15,20 @@ export default function ShippingPage() {
       sections={[
         {
           heading: "Free Standard Shipping",
-          content: "All orders over $50 qualify for free standard shipping within the contiguous United States. Orders under $50 are charged a flat rate of $4.99.",
+          content: `All orders over ${threshold} qualify for free standard shipping within the contiguous United States. Orders under ${threshold} are charged a flat rate of ${formatPrice(shipping.standardFee)}.`,
         },
         {
           heading: "Delivery Timeframes",
           content: [
-            "Standard Shipping: 5–7 business days.",
-            "Express Shipping: 2–3 business days ($9.99).",
-            "Overnight Shipping: Next business day if ordered before 1pm EST ($24.99).",
-            "International Shipping: 10–21 business days (rates calculated at checkout).",
+            `Standard Shipping: ${shipping.standardDays}.`,
+            `Express Shipping: ${shipping.expressDays} (${formatPrice(shipping.expressFee)}).`,
+            `Overnight Shipping: Next business day if ordered before ${shipping.overnightCutoff} (${formatPrice(shipping.overnightFee)}).`,
+            `International Shipping: ${shipping.internationalDays} (rates calculated at checkout).`,
           ],
         },
         {
           heading: "Order Processing",
-          content: "Orders placed before 2pm EST on business days are processed the same day. Orders placed on weekends or holidays are processed the next business day. You'll receive a shipping confirmation email with tracking information once your order ships.",
+          content: `Orders placed before ${shipping.processingCutoff} on business days are processed the same day. Orders placed on weekends or holidays are processed the next business day. You'll receive a shipping confirmation email with tracking information once your order ships.`,
         },
         {
           heading: "Tracking Your Order",

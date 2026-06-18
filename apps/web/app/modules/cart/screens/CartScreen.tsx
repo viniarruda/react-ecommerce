@@ -5,9 +5,9 @@ import { Heading, Text, Button, Card, Skeleton, PriceDisplay } from "@react-shop
 import { useCart, useClearCart, useMe } from "@react-shop/sdk";
 import { useGuestCart } from "@/app/providers/GuestCartProvider";
 import { CartItemRow } from "../components";
+import { formatPrice } from "@/lib/format";
 
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+const fmt = (n: number) => formatPrice(n);
 
 /* ── Guest cart view ─────────────────────────────────────── */
 function GuestCartScreen() {

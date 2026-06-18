@@ -1,6 +1,7 @@
 import { StaticPage } from "@/app/modules/static/StaticPage";
+import { branding } from "@/config/branding";
 
-export const metadata = { title: "Privacy Policy | Berzerk" };
+export const metadata = { title: "Privacy Policy" };
 
 export default function PrivacyPage() {
   return (
@@ -52,7 +53,7 @@ export default function PrivacyPage() {
         },
         {
           heading: "Contact Us",
-          content: "If you have questions about this Privacy Policy or how we handle your data, please contact us at support@berzerk.com.",
+          content: `If you have questions about this Privacy Policy or how we handle your data, please contact us at ${branding.contact.email}.`,
         },
       ]}
     />

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Heading, Text, Badge } from "@react-shop/design-system";
 import { useAllOrders, useUpdateOrderStatus, OrderStatus } from "@react-shop/sdk";
 import { AdminTable } from "../components";
+import { formatPrice, formatDate } from "@/lib/format";
 
 const STATUS_OPTIONS: OrderStatus[] = [
   OrderStatus.PENDING,
@@ -21,8 +22,7 @@ const STATUS_COLOR: Record<OrderStatus, string> = {
   [OrderStatus.CANCELLED]: "bg-error-100 text-error-700",
 };
 
-const fmt = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+const fmt = (n: number) => formatPrice(n);
 
 export function AdminOrdersScreen() {
   const { data: orders, isLoading } = useAllOrders();
@@ -57,7 +57,7 @@ export function AdminOrdersScreen() {
               key: "date",
               header: "Date",
               width: "120px",
-              render: (o) => new Date(o.createdAt).toLocaleDateString(),
+              render: (o) => formatDate(o.createdAt),
             },
             {
               key: "items",
