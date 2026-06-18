@@ -25,6 +25,8 @@ yarn-error.log*
 
 packages/**/lib
 packages/**/lib-esm
+# keep source lib directories
+!packages/**/src/lib
 
 
 # next.js
