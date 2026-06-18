@@ -27,12 +27,13 @@ async function main() {
   // 1. CREATE USERS
   // ============================================================================
   console.log('👤 Creating users...');
-  const adminPassword = await bcrypt.hash('admin123', 10);
+  const adminEmail = process.env.SEED_ADMIN_EMAIL || 'admin@ecommerce.com';
+  const adminPassword = await bcrypt.hash(process.env.SEED_ADMIN_PASSWORD || 'admin123', 10);
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@ecommerce.com' },
+    where: { email: adminEmail },
     update: {},
     create: {
-      email: 'admin@ecommerce.com',
+      email: adminEmail,
       password: adminPassword,
       firstName: 'Admin',
       lastName: 'User',
@@ -43,12 +44,13 @@ async function main() {
     },
   });
 
-  const customerPassword = await bcrypt.hash('customer123', 10);
+  const customerEmail = process.env.SEED_CUSTOMER_EMAIL || 'customer@example.com';
+  const customerPassword = await bcrypt.hash(process.env.SEED_CUSTOMER_PASSWORD || 'customer123', 10);
   const customer = await prisma.user.upsert({
-    where: { email: 'customer@example.com' },
+    where: { email: customerEmail },
     update: {},
     create: {
-      email: 'customer@example.com',
+      email: customerEmail,
       password: customerPassword,
       firstName: 'John',
       lastName: 'Doe',
@@ -631,7 +633,7 @@ async function main() {
       update: {},
       create: {
         key: 'store_name',
-        value: { name: 'React Ecommerce Store' },
+        value: { name: process.env.SEED_STORE_NAME || 'React Ecommerce Store' },
       },
     }),
     prisma.storeSetting.upsert({
@@ -639,7 +641,7 @@ async function main() {
       update: {},
       create: {
         key: 'store_email',
-        value: { email: 'support@ecommerce.com' },
+        value: { email: process.env.SEED_STORE_EMAIL || 'support@ecommerce.com' },
       },
     }),
     prisma.storeSetting.upsert({
@@ -647,7 +649,7 @@ async function main() {
       update: {},
       create: {
         key: 'currency',
-        value: { code: 'USD', symbol: '$' },
+        value: { code: process.env.SEED_CURRENCY || 'USD', symbol: process.env.SEED_CURRENCY_SYMBOL || '$' },
       },
     }),
   ]);
