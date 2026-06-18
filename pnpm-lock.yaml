@@ -83,6 +83,9 @@ importers:
       graphql:
         specifier: ^16.8.0
         version: 16.12.0
+      module-alias:
+        specifier: ^2.3.4
+        version: 2.3.4
       nodemailer:
         specifier: ^7.0.11
         version: 7.0.11
@@ -135,6 +138,9 @@ importers:
       '@types/jest':
         specifier: 29.5.12
         version: 29.5.12
+      '@types/module-alias':
+        specifier: ^2.0.4
+        version: 2.0.4
       '@types/node':
         specifier: ^20.0.0
         version: 20.19.27
@@ -4909,6 +4915,10 @@ packages:
 
   /@types/minimist@1.2.5:
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
+    dev: true
+
+  /@types/module-alias@2.0.4:
+    resolution: {integrity: sha512-5+G/QXO/DvHZw60FjvbDzO4JmlD/nG5m2/vVGt25VN1eeP3w2bCoks1Wa7VuptMPM1TxJdx6RjO70N9Fw0nZPA==}
     dev: true
 
   /@types/ms@2.1.0:
@@ -9731,6 +9741,10 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: false
+
+  /module-alias@2.3.4:
+    resolution: {integrity: sha512-bOclZt8hkpuGgSSoG07PKmvzTizROilUTvLNyrMqvlC9snhs7y7GzjNWAVbISIOlhCP1T14rH1PDAV9iNyBq/w==}
     dev: false
 
   /ms@2.0.0:
