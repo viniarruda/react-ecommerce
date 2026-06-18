@@ -8,7 +8,8 @@
   "scripts": {
     "postinstall": "prisma generate",
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "nest build && tsc-alias -p tsconfig.build.json",
+    "vercel-build": "prisma generate && npm run build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
@@ -86,6 +87,7 @@
     "ts-jest": "29.2.5",
     "ts-loader": "^9.5.0",
     "ts-node": "^10.9.0",
+    "tsc-alias": "^1.8.17",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.21.0",
     "typescript": "^5.0.0"

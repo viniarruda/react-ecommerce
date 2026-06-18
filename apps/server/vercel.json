@@ -1,12 +1,12 @@
 {
   "version": 2,
+  "buildCommand": "npm run vercel-build",
   "builds": [
     {
       "src": "api/index.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["src/**", "prisma/**", "node_modules/.prisma/**"],
-        "tsconfig": "tsconfig.api.json"
+        "includeFiles": ["dist/**", "node_modules/.prisma/**"]
       }
     }
   ],
