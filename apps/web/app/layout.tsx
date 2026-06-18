@@ -33,8 +33,15 @@ export const metadata: Metadata = {
   description: branding.store.description,
 };
 
+function resolveApiUrl(url: string | undefined): string {
+  const base = url || "http://localhost:5001";
+  // Ensure the URL has a protocol so Axios treats it as absolute
+  if (/^https?:\/\//.test(base)) return base;
+  return `https://${base}`;
+}
+
 const apiConfig = {
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001",
+  baseURL: resolveApiUrl(process.env.NEXT_PUBLIC_API_URL),
 };
 
 export default function RootLayout({
