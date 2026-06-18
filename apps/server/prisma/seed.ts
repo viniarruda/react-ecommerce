@@ -4,9 +4,15 @@ import { Pool } from 'pg';
 import * as bcrypt from 'bcrypt';
 
 // Create PostgreSQL connection pool
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL || 'postgresql://postgres:postgres@localhost:5432/ecommerce?schema=public',
-});
+// Prefer DIRECT_URL (bypasses PgBouncer) for seed operations,
+// fall back to DATABASE_URL for local dev where there's no DIRECT_URL.
+const connectionString =
+  process.env.DIRECT_URL ||
+  process.env.DATABASE_URL ||
+  process.env.POSTGRES_URL ||
+  'postgresql://postgres:postgres@localhost:5432/react_ecommerce';
+
+const pool = new Pool({ connectionString, ssl: { rejectUnauthorized: false } });
 
 // Create Prisma adapter
 const adapter = new PrismaPg(pool);
