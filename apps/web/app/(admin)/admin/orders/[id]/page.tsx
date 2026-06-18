@@ -1,9 +1,10 @@
 import { AdminOrderDetailScreen } from "@/app/modules/admin/screens";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export default function AdminOrderDetailPage({ params }: Props) {
-  return <AdminOrderDetailScreen orderId={params.id} />;
+export default async function AdminOrderDetailPage({ params }: Props) {
+  const { id } = await params;
+  return <AdminOrderDetailScreen orderId={id} />;
 }
