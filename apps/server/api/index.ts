@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express, { Request, Response } from 'express';
 
-// Import from compiled dist/ where path aliases are resolved by tsc-alias
+// Import from compiled dist/src/ where path aliases are resolved by tsc-alias
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const { AppModule } = require('../dist/app.module');
+const { AppModule } = require('../dist/src/app.module');
 
 const server = express();
 let app: any;
